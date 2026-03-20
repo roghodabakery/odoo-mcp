@@ -4,5 +4,4 @@
 __pycache__/
 *.pyc
 .serena/
-*.md
 tests/

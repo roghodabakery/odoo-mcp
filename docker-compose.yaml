@@ -2,7 +2,7 @@ services:
   odoo-mcp:
     build: .
     ports:
-      - "8080:8080"
+      - 2104:8080
     env_file: .env
     restart: unless-stopped
     healthcheck:

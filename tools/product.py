@@ -169,7 +169,7 @@ def register_tools(mcp):
     """
 
     @mcp.tool(annotations={"readOnlyHint": True})
-    def find_or_flag_product_tool(
+    async def find_or_flag_product_tool(
         description: str,
         quantity: float,
         unit_price: float,
@@ -199,17 +199,17 @@ def register_tools(mcp):
             - {"status": "no_match", "suggested_name": "...", "suggested_qty": N, "suggested_price": N.N, "needs_creation": True}
         """
         if ctx:
-            ctx.info(f"Searching for product: {description}")
+            await ctx.info(f"Searching for product: {description}")
 
         result = find_or_flag_product(description, quantity, unit_price)
 
         if ctx:
-            ctx.info(f"Product search result: {result['status']}")
+            await ctx.info(f"Product search result: {result['status']}")
 
         return result
 
     @mcp.tool()
-    def create_product(
+    async def create_product(
         name: str,
         product_type: str = "product",
         standard_price: float = 0.0,
@@ -230,7 +230,7 @@ def register_tools(mcp):
             dict with success status, product_id, and name
         """
         if ctx:
-            ctx.info(f"Creating product: {name}")
+            await ctx.info(f"Creating product: {name}")
 
         models, uid = get_models()
 
@@ -275,7 +275,7 @@ def register_tools(mcp):
         refresh_product_cache()
 
         if ctx:
-            ctx.info(f"Product created successfully with ID: {product_id}")
+            await ctx.info(f"Product created successfully with ID: {product_id}")
 
         return {
             "success": True,
